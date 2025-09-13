@@ -73,6 +73,16 @@ By combining **data science techniques** with **business insights**, this projec
 ---
 
 ## 🔍 Key Insights
+| Segment             | RFM Characteristics               | Business Action                                                                 |
+|---------------------|-----------------------------------|----------------------------------------------------------------------------------|
+| **Champions**       | R=4–5, F=4–5, M=4–5               | Reward loyalty, early access to new products, VIP programs                      |
+| **Loyal Customers** | R=3–5, F=3–5, M=2–4               | Keep engaged with personalized offers, upsell higher-value items                |
+| **Potential Loyalists** | R=3–4, F=2–3, M=2–3           | Nurture with targeted campaigns, encourage repeat purchases                     |
+| **Recent Customers**| R=4–5, F=1–2, M=1–2               | Welcome campaigns, onboarding offers                                            |
+| **Promising**       | R=3–4, F=1–2, M=1–2               | Educate them with product recommendations                                       |
+| **At Risk**         | R=1–2, F=2–3, M=2–3               | Win-back campaigns, discounts, reminders                                        |
+| **Hibernating**     | R=1–2, F=1–2, M=1–2               | Re-engagement campaigns, seasonal promos                                        |
+| **Other**            | R=1, F=1, M=1                     | Consider dropping from campaigns or only send high-discount offers             |
 - **Top Customers:** A small group of Champions drive a disproportionate share of revenue.  
 - **Customer Segmentation (RFM):**
   - **Champions & Loyal Customers:** 0% churn, strong retention.  
