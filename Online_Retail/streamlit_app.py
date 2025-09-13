@@ -40,7 +40,7 @@ st.title("Online Retail II dashboard")
 
 total_sales = df['TotalAmount'].sum()
 total_customers = df['CustomerId'].nunique()
-avg_order_value = df.groupby('Invoice')['TotalAmount'].sum().mean()
+avg_order_value = df.groupby('InvoiceNo')['TotalAmount'].sum().mean()
 
 col1,col2,col3 = st.columns(3)
 
@@ -136,28 +136,80 @@ with tab3:
     st.write("Exact Churn Rates (in %):")
     st.dataframe(churn_by_cluster.round(2))
     
+import plotly.graph_objects as go
+
 with tab4:
     st.subheader("Sales Forecast (Next 6 Months)")
 
-    # Aggregate monthly sales
     monthly_sales = df.groupby(df['InvoiceDate'].dt.to_period('M'))['TotalAmount'].sum().reset_index()
     monthly_sales['InvoiceDate'] = monthly_sales['InvoiceDate'].dt.to_timestamp()
-
     sales = monthly_sales.rename(columns={'InvoiceDate':'ds','TotalAmount':'y'})
 
-    # Fit Prophet model
-    model = Prophet()
-    model.fit(sales)
+    st.write("Sales Data Sample:")
+    st.write(sales.head())
 
-    # Future predictions
-    future = model.make_future_dataframe(periods=6, freq='M')
-    forecast = model.predict(future)
+    try:
+        model = Prophet()
+        model.fit(sales)
 
-    # Plot with matplotlib
-    fig, ax = plt.subplots(figsize=(10,5))
-    model.plot(forecast, ax=ax)
-    plt.title("Monthly Sales Forecast")
-    plt.ylabel("Sales (£)")
-    st.pyplot(fig)
+        future = model.make_future_dataframe(periods=6, freq='MS')
+        forecast = model.predict(future)
 
-    st.success("✅ Forecast generated successfully!")
+        st.write("Forecast Sample:")
+        st.write(forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].head())
+
+        # Create plotly figure
+        fig = go.Figure()
+
+        # Historical data
+        fig.add_trace(go.Scatter(
+            x=sales['ds'],
+            y=sales['y'],
+            mode='markers+lines',
+            name='Historical Sales',
+            line=dict(color='blue'),
+            marker=dict(size=6)
+        ))
+
+        # Forecast yhat line
+        fig.add_trace(go.Scatter(
+            x=forecast['ds'],
+            y=forecast['yhat'],
+            mode='lines',
+            name='Forecast',
+            line=dict(color='orange')
+        ))
+
+        # Upper confidence bound
+        fig.add_trace(go.Scatter(
+            x=forecast['ds'],
+            y=forecast['yhat_upper'],
+            mode='lines',
+            name='Upper Confidence',
+            line=dict(width=0),
+            showlegend=False
+        ))
+
+        # Lower confidence bound, fill between with upper bound
+        fig.add_trace(go.Scatter(
+            x=forecast['ds'],
+            y=forecast['yhat_lower'],
+            mode='lines',
+            fill='tonexty',
+            fillcolor='rgba(255, 165, 0, 0.2)',  # translucent orange
+            name='Confidence Interval',
+            line=dict(width=0),
+        ))
+
+        fig.update_layout(
+            title='Monthly Sales Forecast (Interactive)',
+            xaxis_title='Date',
+            yaxis_title='Sales (£)',
+            template='plotly_dark',
+            hovermode='x unified'
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+    except Exception as e:
+        st.error(f"Error in forecasting: {e}")

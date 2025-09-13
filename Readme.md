@@ -27,7 +27,8 @@ pip install -r requirements.txt
 DATA_ANALYTICS/
 │
 ├── Online_Retail/
-│   ├── online_retail_II.csv           # Original raw dataset
+│   ├── online_retail_II.csv           # Original raw dataset (2009 - 2010)
+|   ├── Online_Retail.csv              # Original raw dataset(2010 - 2011)
 │   ├── cleaned_online_retail.csv      # Cleaned version used by the app
 │   ├── customer_segments.csv          # RFM + churn features
 │   └── images/                        # images used
@@ -39,14 +40,20 @@ DATA_ANALYTICS/
 ```
 
 ## 📌 Project Overview
-This project analyzes the **Online Retail II dataset** (from [Kaggle](https://www.kaggle.com/datasets)) — a real-world e-commerce dataset containing ~500K transactions from 2009–2010.  
+This project analyzes the **Online Retail dataset**  
+and **Online Retail II dataset**
+(from [Kaggle](https://www.kaggle.com/datasets/ulrikthygepedersen/online-retail-dataset)) — real-world e-commerce datasets containing more that 800k transactions transactions from 2009–2011. 
+I have downloaded them and added them to my project folder 
+ - [Online_Retail.csv](Online_Retail\Online_Retail.csv) - containing 541909 rows
+- [online_retail_II.csv](Online_Retail\online_retail_II.csv) - containing around 525461  rows
+
 The goal is to explore customer purchasing behavior, segment customers for targeted marketing, and identify churn risks to improve retention strategies.
 
 ---
 ## 📖 Introduction
 
 Understanding customer behavior is the cornerstone of any successful retail business.  
-This project leverages the **Online Retail II dataset** (500K+ transactions from a UK-based online store between 2009–2010) to explore:
+This project leverages a joined dataset **Online Retail datasets** (700+ transactions from a UK-based online store between 2009–2011) to explore:
 
 - **Customer Segmentation** using RFM analysis and KMeans clustering  
 - **Churn Analysis** to identify at-risk groups and retention opportunities  
@@ -57,11 +64,11 @@ By combining **data science techniques** with **business insights**, this projec
 
 ## ⚙️ Tools & Technologies
 - **Python**: pandas, numpy, scikit-learn  
-- **Visualization**: matplotlib, seaborn  
+- **Visualization**: matplotlib, seaborn, plotly
 - **Segmentation**: RFM Analysis (Recency, Frequency, Monetary)  
 - **Clustering**: KMeans  
 - **Churn Analysis**: Time-based cutoff method  
-- **Interactive App**: Streamlit (planned deployment)  
+- **Interactive App**: Streamlit for deployment 
 
 ---
 
@@ -69,11 +76,11 @@ By combining **data science techniques** with **business insights**, this projec
 - **Top Customers:** A small group of Champions drive a disproportionate share of revenue.  
 - **Customer Segmentation (RFM):**
   - **Champions & Loyal Customers:** 0% churn, strong retention.  
-  - **At Risk & Hibernating:** >80% churn, need targeted re-engagement.  
+  - **At Risk & Hibernating:** >100% churn, need targeted re-engagement.  
   - **Potential Loyalists:** A growing group that can be nurtured into Champions.  
 - **Churn Analysis:**
-  - Overall churn ≈ 20–25%, but concentrated in “At Risk” and “Hibernating”.  
-  - ML-based clustering highlighted one group (Cluster 1) with **100% churn**.  
+  - Overall churn ≈ 40.83%, but concentrated in “At Risk” and “Hibernating”.  
+  - ML-based clustering highlighted one group (Cluster 0) with **100% churn**.  
 
 ---
 
@@ -118,8 +125,7 @@ streamlit run streamlit_app.py
 - Uses **Facebook Prophet** to forecast sales for the next 6 months.  
 - Provides confidence intervals for business planning.  
 
-![Churn Analysis Tab](/Online_Retail/images/sales_forecast.png) 
-
+![Churn Analysis Tab](/Online_Retail/images/sales_forecast.png.png)
 ## 🏁 Conclusion
 
 This project demonstrates how advanced analytics can turn raw e-commerce data into **strategic business insights**:
