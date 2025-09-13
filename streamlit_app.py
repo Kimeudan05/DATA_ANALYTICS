@@ -8,7 +8,7 @@ import plotly.express as px
 #load data
 @st.cache_data
 def load_data():
-    df= pd.read_csv("cleaned_online_retail.csv",parse_dates=['InvoiceDate'])
+    df= pd.read_csv("assets/cleaned_online_retail.csv",parse_dates=['InvoiceDate'])
     return df
 
 df= load_data()
@@ -95,7 +95,7 @@ with tab1:
 
 with tab2:
     st.subheader("Customer segmentation (RFM)")
-    rfm = pd.read_csv('customer_segments.csv')
+    rfm = pd.read_csv('assets/customer_segments.csv')
 
     # Segment counts sorted
     segment_counts = rfm['Segment'].value_counts().sort_values(ascending=False).reset_index()

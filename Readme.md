@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ```
 DATA_ANALYTICS/
 │
-├── Online_Retail/
+├── assets/
 │   ├── online_retail_II.csv           # Original raw dataset (2009 - 2010)
 |   ├── Online_Retail.csv              # Original raw dataset(2010 - 2011)
 │   ├── cleaned_online_retail.csv      # Cleaned version used by the app
@@ -107,14 +107,14 @@ To make the analysis accessible and interactive, I built a **Streamlit dashboard
 ### Dashboard Preview
 - Dashboard Overview
 
-![Dashboard Overview](/Online_Retail/images/dashboard_overview.png)  
+![Dashboard Overview](/assets/images/dashboard_overview.png)  
 
 - Segmentation Tab
 
-![Segmentation Tab](/Online_Retail/images/segmentation.png)
+![Segmentation Tab](/assets/images/segmentation.png)
 - Churn Analysis Tab  
 
-![Churn Analysis Tab](/Online_Retail/images/churn_analysis.png)  
+![Churn Analysis Tab](/assets/images/churn_analysis.png)  
 
 ### Run the Dashboard Locally
 ```bash
@@ -125,7 +125,7 @@ streamlit run streamlit_app.py
 - Uses **Facebook Prophet** to forecast sales for the next 6 months.  
 - Provides confidence intervals for business planning.  
 
-![Churn Analysis Tab](/Online_Retail/images/sales_forecast.png.png)
+![Churn Analysis Tab](assets/images/sales_forecast.png.png)
 ## 🏁 Conclusion
 
 This project demonstrates how advanced analytics can turn raw e-commerce data into **strategic business insights**:
